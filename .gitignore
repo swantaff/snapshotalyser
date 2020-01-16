@@ -1,3 +1,8 @@
+Pipfile.lock
+
+# add .vscode directory
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
