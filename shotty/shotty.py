@@ -67,7 +67,25 @@ def stop_instances(project):
 
     return
 
+@instances.command('start')
+@click.option('--project', default=None,
+    help="Only instances for project (tag Project:<name>)")
+def stop_instances(project):
+    "Start EC2 instances"
+    
+    instances = filter_instances(project)
 
+    if project:
+        filters = [{'Name':'tag:Project', 'Values':[project]}]
+        instances = ec2.instances.filter(Filters=filters)
+    else:
+        instances = ec2.instances.all()
+
+    for i in instances:
+        print("Starting {0}...".format(i.id))
+        i.start()
+
+    return
 if __name__ == '__main__':
     instances()
 
